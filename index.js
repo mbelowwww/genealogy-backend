@@ -11,12 +11,17 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}))
 
 app.use(require('./errorHandler'))
+
+//Auth
+const authRouter = require('./routes/Auth')
+app.use('/api', authRouter)
+
+// User
 const userRoute = require('./routes/User')
 app.use('/api/user', userRoute)
 
 async function start(){
     try {
-        console.log(bodyParser)
         await mongoose.connect(
             'mongodb+srv://genealogy:genealogy@cluster0.ua3xy.mongodb.net/genealogy',
             {
