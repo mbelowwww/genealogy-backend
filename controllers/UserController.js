@@ -19,7 +19,7 @@ const findAll = (req, res, next) => {
 // create new User
 const create = (req, res, next) => {
     let user = new User({
-        username: req.body.name,
+        username: req.body.username,
         password: req.body.password
     })
     user.save()

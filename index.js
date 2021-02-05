@@ -1,21 +1,22 @@
 const express = require('express')
 const mongoose = require('mongoose')
-const bodyParser = require('body-parser');
+const bodyParser = require('body-parser')
+const morgan = require('morgan')
 
 const PORT = process.env.PORT || 3000
 const app = express();
 
+app.use(morgan('dev'))
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}))
+
+app.use(require('./errorHandler'))
 const userRoute = require('./routes/User')
 app.use('/api/user', userRoute)
 
-app.use(bodyParser.json({
-    limit:"10kb"
-}));
-
-app.use(require('./errorHandler'));
-
 async function start(){
     try {
+        console.log(bodyParser)
         await mongoose.connect(
             'mongodb+srv://genealogy:genealogy@cluster0.ua3xy.mongodb.net/genealogy',
             {
