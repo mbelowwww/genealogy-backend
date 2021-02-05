@@ -31,6 +31,41 @@ const registration = (req, res, next) => {
     })
 }
 
+const login = async (req, res, next) => {
+    const login = req.body.username;
+    const password = req.body.password
+
+
+    await User.findOne({username: login})
+        .then(user => {
+            if (user) {
+                bcrypt.compare(password, user.password, function (err, result) {
+                    if (err) {
+                        res.json({
+                            error: err
+                        });
+                    }
+                    if (result) {
+                        let token = jwt.sign({name: user.name},
+                            'verySercretValue',
+                            {expiresIn: '1h'});
+                        res.json({
+                            message: token
+                        })
+                    } else {
+                        res.json({
+                            message: 'Password does not matched!'
+                        })
+                    }
+                });
+            } else {
+                res.json({
+                    message: 'User not found!'
+                })
+            }
+        })
+}
+
 module.exports = {
-    registration
+    registration, login
 }
