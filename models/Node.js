@@ -19,10 +19,16 @@ const nodeSchema = new mongoose.Schema({
     },
 
     birthday: {
-        type: Date,
-        required: true
+        type: Date
     },
-    children: { type: [String], index: true }
-});
+    parents: {
+        type: [String],
+        index: true
+    },
+    children: {
+        type: [String],
+        index: true
+    }
+}, {timestamps: true});
 
 module.exports = mongoose.model('Node', nodeSchema);

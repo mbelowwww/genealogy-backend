@@ -12,13 +12,17 @@ app.use(bodyParser.urlencoded({extended: true}))
 
 app.use(require('./errorHandler'))
 
-//Auth
-const authRouter = require('./routes/Auth')
-app.use('/api', authRouter)
+// Auth
+const authRoute = require('./routes/Auth')
+app.use('/api', authRoute)
 
 // User
 const userRoute = require('./routes/User')
 app.use('/api/user', userRoute)
+
+// Node
+const nodeRoute = require('./routes/Node')
+app.use('/api/node', nodeRoute)
 
 async function start(){
     try {
@@ -36,7 +40,6 @@ async function start(){
         console.log(e);
     }
 }
-
 start()
 
 
