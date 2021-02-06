@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 const nodeSchema = new mongoose.Schema({
     userId: {
         type: String,
-        required: true
+        required: true,
+        index: true
     },
     firstName: {
         type: String,
@@ -21,7 +22,7 @@ const nodeSchema = new mongoose.Schema({
         type: Date,
         required: true
     },
-    children: [String]
+    children: { type: [String], index: true }
 });
 
-module.exports = mongoose.model('Node',nodeSchema);
+module.exports = mongoose.model('Node', nodeSchema);
