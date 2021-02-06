@@ -46,9 +46,9 @@ const login = async (req, res, next) => {
                         });
                     }
                     if (result) {
-                        let token = jwt.sign({name: user.name},
-                            'verySercretValue',
-                            {expiresIn: '1h'});
+                        let token = jwt.sign({username: user.username},
+                            'secret',
+                            {expiresIn: '8h'});
                         res.json({
                             message: token
                         })
