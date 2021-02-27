@@ -27,7 +27,7 @@ app.use('/api/node', nodeRoute)
 async function start(){
     try {
         await mongoose.connect(
-            'mongodb+srv://genealogy:genealogy@cluster0.ua3xy.mongodb.net/genealogy',
+            '"mongodb://localhost:27017/test',
             {
                 useUnifiedTopology: true,
                 useNewUrlParser: true,
