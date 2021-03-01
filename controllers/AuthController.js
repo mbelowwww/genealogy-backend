@@ -50,15 +50,17 @@ const login = async (req, res, next) => {
                             'secret',
                             {expiresIn: '8h'});
                         res.json({
-                            message: token
+                            jwt: token
                         })
                     } else {
+                        res.status(401);
                         res.json({
                             message: 'Password does not matched!'
                         })
                     }
                 });
             } else {
+                res.status(401);
                 res.json({
                     message: 'User not found!'
                 })

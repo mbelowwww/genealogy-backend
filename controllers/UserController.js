@@ -1,5 +1,26 @@
 const User = require('../models/User')
 
+//info from authentication principal
+const info = async (req, res, next) => {
+     await User.findOne( function(err,obj) {}).exec()
+         .then(user => {
+             console.log(user)
+             res.json({
+                 id: user.id,
+                 username: user.username,
+                 firstName: user.firstName,
+                 middleName: user.middleName,
+                 lastName: user.lastName,
+                 birthDay: user.birthday
+             })
+         })
+         .catch(err => {
+             res.json({
+                 message: 'Error find User!'
+             })
+         })
+}
+
 //find all User
 const findAll = (req, res, next) => {
     User.find()
@@ -55,5 +76,5 @@ const update = (req, res, next) => {
 }
 
 module.exports = {
-    findAll, create, update
+    findAll, create, update, info
 }
