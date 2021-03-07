@@ -2,23 +2,24 @@ const User = require('../models/User')
 
 //info from authentication principal
 const info = async (req, res, next) => {
-     await User.findOne( function(err,obj) {}).exec()
-         .then(user => {
-             console.log(user)
+    console.log(req.user.username);
+    await User.findOne( { username: req.user.username }).exec()
+        .then(response => {
+             console.log(response)
              res.json({
-                 id: user.id,
-                 username: user.username,
-                 firstName: user.firstName,
-                 middleName: user.middleName,
-                 lastName: user.lastName,
-                 birthDay: user.birthday
+                 id: response.id,
+                 username: response.username,
+                 firstName: response.firstName,
+                 middleName: response.middleName,
+                 lastName: response.lastName,
+                 birthDay: response.birthday
              })
          })
-         .catch(err => {
+        .catch(err => {
              res.json({
                  message: 'Error find User!'
              })
-         })
+        })
 }
 
 //find all User
